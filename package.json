@@ -1,0 +1,19 @@
+{
+  "name": "queue-file",
+  "version": "0.0.1",
+  "description": "Simple queue based on JSON files",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine"
+  },
+  "author": "walter.dalmut@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^2.5.3",
+    "mock-fs": "^4.1.0"
+  },
+  "dependencies": {
+    "ls-stat": "^1.0.0",
+    "mkdirp": "^0.5.1"
+  }
+}
