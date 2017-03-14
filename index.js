@@ -27,7 +27,15 @@ module.exports = function(basepath, callback) {
         };
       }
 
+      let stop = false;
+
       return callback(undefined, {
+        reset: function() {
+          stop = false;
+        },
+        close: function() {
+          stop = true;
+        },
         push: function(data, callback) {
           let filename = path.join(basepath, new Date().getTime().toString() + Math.random().toString());
           fs.writeFile(filename, JSON.stringify(data), (err) => {
@@ -42,6 +50,9 @@ module.exports = function(basepath, callback) {
         },
         pop: function pop(callback) {
           return (function next() {
+            if (stop === true) {
+              return false;
+            }
 
             if (!queue.length) {
               return setTimeout(next, 1000);

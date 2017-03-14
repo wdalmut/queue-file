@@ -112,17 +112,46 @@ describe("Queue", () => {
 
     afterEach(mock.restore);
 
-    it("should create", (done) => {
+    it("should rollback the current message", (done) => {
       queue("/basepath", (err, _) => {
+        let i=0;
         _.pop(function(data, next, commit, rollback) {
-          expect(data.test).toBe(true);
-          rollback();
+          i += 1;
 
-          _.pop(function(data, next, commit, rollback) {
+          if (i==1) {
             expect(data.test).toBe(true);
-            commit(done);
-          });
+            rollback(next);
+          } else if (i==2) {
+            expect(data.test).toBe(true);
+            commit(next);
+            done();
+          }
         });
+      });
+    });
+  });
+
+  describe("close", () => {
+    beforeEach(() => {
+      mock({
+        "/basepath": {
+          "01": '{"test": true}',
+        },
+      });
+    });
+
+    afterEach(mock.restore);
+
+    it("should not return the message", (done) => {
+      queue("/basepath", (err, _) => {
+        _.close();
+
+        let ret = _.pop(function(data, next, commit, rollback) {
+          fail("this method should not be called");
+        });
+
+        expect(ret).toBe(false);
+        setTimeout(done, 1000);
       });
     });
   });
