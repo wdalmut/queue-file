@@ -1,3 +1,5 @@
+'use strict';
+
 const queue = require('../');
 const mock = require('mock-fs');
 

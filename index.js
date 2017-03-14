@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const ls = require('ls-stat');
 const path = require('path');
