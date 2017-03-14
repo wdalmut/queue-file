@@ -1,5 +1,7 @@
 # Queue
 
+[![Build Status](https://travis-ci.org/wdalmut/queue-file.svg?branch=master)](https://travis-ci.org/wdalmut/queue-file)
+
 Just a simple queue based on files
 
 ```sh
