@@ -44,7 +44,7 @@ module.exports = function(basepath, callback) {
           return (function next() {
 
             if (!queue.length) {
-              setTimeout(next, 1000);
+              return setTimeout(next, 1000);
             }
 
             let filename = queue[0];
